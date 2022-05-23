@@ -11,8 +11,6 @@ const SpecificationsForm = () => {
         <TextInput type="text" style={styles.input} placeholder="Date of journey" />
         <TextInput type="text" style={styles.input} placeholder="Date of journey" />
         <TextInput type="text" style={styles.input} placeholder="Time of journey" />
-
-
     </View>
 }
 const styles = StyleSheet.create({
