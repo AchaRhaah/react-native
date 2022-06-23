@@ -1,24 +1,27 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 
 export default function App() {
-  const [hairStyle, setAppointment] = useState({
-    name: "Knotless",
-    price: 6000,
-  });
-  const pressHandler = () => {
-    setAppointment({ name: "twist", price: 6000 });
-  };
-
+  const [name, setAppointment] = useState("Knotless");
+  const [age, setAge] = useState(30);
   return (
     <View style={styles.container}>
-      <Text>
-        {hairStyle.name} cost {hairStyle.price}
-      </Text>
-      <View style={styles.buttonContainer}>
-        <Button title="Update State" onPress={pressHandler} />
-      </View>
+      <Text>Enter your name:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="eg John Doe"
+        onChangeText={(val) => setAppointment(val)}
+      ></TextInput>
+      <Text>{name}</Text>
+      <Text>Enter your age: </Text>
+      <TextInput
+        keyboardType="numeric"
+        placeholder="eg 95"
+        style={styles.input}
+        onChangeText={(val) => setAge(val)}
+      ></TextInput>
+      <Text>Your age is {age}</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -33,5 +36,12 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#777",
+    padding: 8,
+    margin: 10,
+    width: 200,
   },
 });
