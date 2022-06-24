@@ -3,36 +3,33 @@ import { useState } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 
 export default function App() {
-  const [name, setAppointment] = useState("Knotless");
-  const [age, setAge] = useState(30);
+  const [hairstyles, setAppointment] = useState([
+    { name: "Knotless", price: 6000, key: 1 },
+    { name: "twists", price: 6500, key: 2 },
+    { name: "Ghana Braids", price: 3500, key: 3 },
+    { name: "Jungle Braids", price: 7000, key: 4 },
+    { name: "butterfly Locs", price: 10000, key: 5 },
+  ]);
   return (
     <View style={styles.container}>
-      <Text>Enter your name:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="eg John Doe"
-        onChangeText={(val) => setAppointment(val)}
-      ></TextInput>
-      <Text>{name}</Text>
-      <Text>Enter your age: </Text>
-      <TextInput
-        keyboardType="numeric"
-        placeholder="eg 95"
-        style={styles.input}
-        onChangeText={(val) => setAge(val)}
-      ></TextInput>
-      <Text>Your age is {age}</Text>
-      <StatusBar style="auto" />
+      {hairstyles.map((item) => {
+        return (
+          <View key={item.key}>
+            <Text>{item.name}</Text>
+          </View>
+        );
+      })}
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 40,
+    paddingHorizontal: 20,
+    // alignItems: "center",
+    // justifyContent: "center",
   },
   buttonContainer: {
     marginTop: 20,
