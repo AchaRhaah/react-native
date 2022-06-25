@@ -1,6 +1,12 @@
-import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 
 export default function App() {
   const [hairstyles, setAppointment] = useState([
@@ -10,15 +16,28 @@ export default function App() {
     { name: "Jungle Braids", price: 7000, key: 4 },
     { name: "butterfly Locs", price: 10000, key: 5 },
   ]);
+  const pressHandler = (key) => {
+    setAppointment((prevAppt) => {
+      return prevAppt.filter((person) => person.key != key);
+    });
+  };
   return (
     <View style={styles.container}>
-      {hairstyles.map((item) => {
-        return (
+      <FlatList
+        data={hairstyles}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => pressHandler(item.key)}>
+            <Text style={styles.item}>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+      />
+      {/* {hairstyles.map((item) => {
+        return (hairstyles
           <View key={item.key}>
             <Text>{item.name}</Text>
           </View>
         );
-      })}
+      })} */}
     </View>
   );
 }
@@ -40,5 +59,13 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 10,
     width: 200,
+  },
+  item: {
+    color: "red",
+    fontSize: 30,
+    width: 300,
+    height: 80,
+    margin: 50,
+    backgroundColor: "pink",
   },
 });
