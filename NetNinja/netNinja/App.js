@@ -1,6 +1,12 @@
-import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, View, TextInput, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 
 export default function App() {
   const [hairstyles, setAppointment] = useState([
@@ -10,18 +16,23 @@ export default function App() {
     { name: "Jungle Braids", price: 7000, key: 4 },
     { name: "butterfly Locs", price: 10000, key: 5 },
   ]);
+  const pressHandler = (key) => {
+    // setAppointment((prevAppt) => {
+    //   return prevAppt.filter((person) => person.key != key);
+    // });
+  };
   return (
     <View style={styles.container}>
       <FlatList
-        numColumns={2}
         data={hairstyles}
         renderItem={({ item }) => (
-          <Text style={styles.item}>{hairstyles.name}</Text>
+          <TouchableOpacity onPress={() => pressHandler(item.key)}>
+            <Text style={styles.item}>{item.name}</Text>
+          </TouchableOpacity>
         )}
       />
-
       {/* {hairstyles.map((item) => {
-        return (
+        return (hairstyles
           <View key={item.key}>
             <Text>{item.name}</Text>
           </View>
@@ -42,12 +53,19 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 20,
   },
-  item: {
+  input: {
     borderWidth: 1,
     borderColor: "#777",
     padding: 8,
     margin: 10,
-    width: 20,
-    backgroundColor: "#fff",
+    width: 200,
+  },
+  item: {
+    color: "red",
+    fontSize: 30,
+    width: 300,
+    height: 80,
+    margin: 50,
+    backgroundColor: "pink",
   },
 });
