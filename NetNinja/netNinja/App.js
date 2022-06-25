@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, TextInput, FlatList } from "react-native";
 
 export default function App() {
   const [hairstyles, setAppointment] = useState([
@@ -12,13 +12,21 @@ export default function App() {
   ]);
   return (
     <View style={styles.container}>
-      {hairstyles.map((item) => {
+      <FlatList
+        numColumns={2}
+        data={hairstyles}
+        renderItem={({ item }) => (
+          <Text style={styles.item}>{hairstyles.name}</Text>
+        )}
+      />
+
+      {/* {hairstyles.map((item) => {
         return (
           <View key={item.key}>
             <Text>{item.name}</Text>
           </View>
         );
-      })}
+      })} */}
     </View>
   );
 }
@@ -34,11 +42,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 20,
   },
-  input: {
+  item: {
     borderWidth: 1,
     borderColor: "#777",
     padding: 8,
     margin: 10,
-    width: 200,
+    width: 20,
+    backgroundColor: "#fff",
   },
 });
