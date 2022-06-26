@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Header from "./components/header";
+import TodoItem from "./components/TodoItem";
+import AddTodo from "./components/AddTodo";
 import {
   StyleSheet,
   Text,
@@ -9,35 +12,37 @@ import {
 } from "react-native";
 
 export default function App() {
-  const [hairstyles, setAppointment] = useState([
-    { name: "Knotless", price: 6000, key: 1 },
-    { name: "twists", price: 6500, key: 2 },
-    { name: "Ghana Braids", price: 3500, key: 3 },
-    { name: "Jungle Braids", price: 7000, key: 4 },
-    { name: "butterfly Locs", price: 10000, key: 5 },
+  const [todo, setTodo] = useState([
+    { text: "code", key: "1" },
+    { text: "sleep", key: "2" },
+    { text: "eat", key: "3" },
   ]);
+
   const pressHandler = (key) => {
-    setAppointment((prevAppt) => {
-      return prevAppt.filter((person) => person.key != key);
+    setTodo((ha) => {
+      return ha.filter((todo) => key != todo.key);
+    });
+  };
+
+  const submitHandler = (text) => {
+    setTodo((prevTodos) => {
+      return [{ text: text, key: Math.random().toString() }, ...prevTodos];
     });
   };
   return (
     <View style={styles.container}>
-      <FlatList
-        data={hairstyles}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => pressHandler(item.key)}>
-            <Text style={styles.item}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
-      />
-      {/* {hairstyles.map((item) => {
-        return (hairstyles
-          <View key={item.key}>
-            <Text>{item.name}</Text>
-          </View>
-        );
-      })} */}
+      <Header />
+      <View style={styles.content}>
+        <AddTodo />
+        <View>
+          <FlatList
+            data={todo}
+            renderItem={({ item }) => (
+              <TodoItem item={item} pressHandler={pressHandler} />
+            )}
+          />
+        </View>
+      </View>
     </View>
   );
 }
@@ -45,27 +50,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 40,
-    paddingHorizontal: 20,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
-  buttonContainer: {
-    marginTop: 20,
+  content: {
+    // padding: 10,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: "#777",
-    padding: 8,
-    margin: 10,
-    width: 200,
+  list: {
+    marginTop: 0,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  item: {
-    color: "red",
-    fontSize: 30,
-    width: 300,
-    height: 80,
-    margin: 50,
-    backgroundColor: "pink",
+  todo: {
+    backgroundColor: "#15616d",
+    height: 40,
+    marginBottom: 2,
+    padding: 10,
+    borderRadius: 10,
+    width: "98%",
   },
 });
