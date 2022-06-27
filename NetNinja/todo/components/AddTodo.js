@@ -8,7 +8,7 @@ import {
   Button,
 } from "react-native";
 
-export default function AddTodo(submitHandler) {
+export default function AddTodo({ submitHandler }) {
   const [text, setText] = useState("");
   const changeHandler = (val) => {
     setText(val);
