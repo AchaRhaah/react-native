@@ -9,6 +9,7 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 export default function App() {
@@ -25,15 +26,21 @@ export default function App() {
   };
 
   const submitHandler = (text) => {
-    setTodo((prevTodos) => {
-      return [{ text: text, key: Math.random().toString() }, ...prevTodos];
-    });
+    if (text.length > 4) {
+      setTodo((prevTodos) => {
+        return [{ text: text, key: Math.random().toString() }, ...prevTodos];
+      });
+    } else {
+      Alert.alert("Oopps", "Todo must be over 4 characters long", [
+        { text: "Understood", onPress: () => console.log("alert closed") },
+      ]);
+    }
   };
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-        <AddTodo />
+        <AddTodo submitHandler={submitHandler} />
         <View>
           <FlatList
             data={todo}
