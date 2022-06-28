@@ -5,7 +5,6 @@ export default function Header() {
   return (
     <View style={styles.header}>
       <Text style={styles.title}>My Todos</Text>
-      <Text></Text>
     </View>
   );
 }
