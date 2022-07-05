@@ -1,9 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import * as Font from "expo-font";
 import { StyleSheet, Text, View } from "react-native";
-import Navigator from "./routes/homeStack";
+import drawer from "./routes/drawer";
 import { globalStyles } from "./styles/global";
 
 export default function App() {
-  return <Navigator />;
+  return <drawer />;
 }

@@ -13,7 +13,8 @@ import { DatePicker } from "react-native-datepicker";
 
 export default function Inputs({ label, placeholder, iconname }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} editable={false}>
+      <View></View>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.content}>
         <FontAwesomeIcon style={styles.icon} icon={iconname} />
@@ -29,15 +30,15 @@ export default function Inputs({ label, placeholder, iconname }) {
 }
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
-    borderBottomWidth: 2,
+    marginBottom: 15,
+    borderBottomWidth: 4,
     borderBottomColor: "red",
     borderStyle: "dashed",
   },
   label: {
     fontSize: 17,
     marginBottom: 0,
-    marginLeft: 20,
+    marginLeft: 38.5,
     color: "#3D3D3D",
     fontFamily: "poppin",
   },
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     width: 300,
     flexDirection: "row",
     alignItems: "center",
-    marginLeft: 7,
+    marginLeft: 20,
   },
   input: {
     marginLeft: 8,
